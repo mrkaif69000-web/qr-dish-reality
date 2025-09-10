@@ -4,7 +4,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { MapPin, ArrowLeft, ShoppingCart } from 'lucide-react';
+import { MapPin, ArrowLeft, ShoppingCart, Clock } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 interface Restaurant {
@@ -24,6 +24,7 @@ interface Dish {
   protein: number;
   model_url: string | null;
   availability: boolean;
+  preparation_time_minutes: number;
 }
 
 const Menu = () => {
@@ -189,7 +190,13 @@ const Menu = () => {
                   <div className="md:w-2/3">
                     <CardHeader>
                       <div className="flex justify-between items-start">
-                        <CardTitle className="text-xl">{dish.name}</CardTitle>
+                        <div>
+                          <CardTitle className="text-xl">{dish.name}</CardTitle>
+                          <div className="flex items-center gap-1 mt-1 text-sm text-muted-foreground">
+                            <Clock className="h-3 w-3" />
+                            <span>{dish.preparation_time_minutes} mins prep</span>
+                          </div>
+                        </div>
                         <Badge variant="secondary" className="text-lg px-3 py-1">
                           ${dish.price}
                         </Badge>

@@ -7,7 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Plus, Minus, ShoppingCart, MapPin, Box, Eye } from 'lucide-react';
+import { Plus, Minus, ShoppingCart, MapPin, Box, Eye, Clock } from 'lucide-react';
 import ARViewer from '@/components/ARViewer';
 import Model3DViewer from '@/components/Model3DViewer';
 import { useToast } from '@/hooks/use-toast';
@@ -29,6 +29,7 @@ interface Dish {
   protein: number;
   model_url: string | null;
   availability: boolean;
+  preparation_time_minutes: number;
 }
 
 interface CartItem {
@@ -268,6 +269,10 @@ const CustomerMenu = () => {
                               <p className="text-sm text-muted-foreground">
                                 ${item.dish.price} × {item.quantity}
                               </p>
+                              <p className="text-xs text-muted-foreground flex items-center gap-1">
+                                <Clock className="h-3 w-3" />
+                                {item.dish.preparation_time_minutes} mins
+                              </p>
                             </div>
                             <div className="flex items-center gap-2">
                               <Button
@@ -416,7 +421,13 @@ const CustomerMenu = () => {
                   <div className="md:w-2/3">
                     <CardHeader>
                       <div className="flex justify-between items-start">
-                        <CardTitle className="text-xl">{dish.name}</CardTitle>
+                        <div>
+                          <CardTitle className="text-xl">{dish.name}</CardTitle>
+                          <div className="flex items-center gap-1 mt-1 text-sm text-muted-foreground">
+                            <Clock className="h-3 w-3" />
+                            <span>{dish.preparation_time_minutes} mins prep</span>
+                          </div>
+                        </div>
                         <Badge variant="secondary" className="text-lg px-3 py-1">
                           ${dish.price}
                         </Badge>

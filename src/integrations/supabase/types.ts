@@ -25,6 +25,7 @@ export type Database = {
           ingredients: string | null
           model_url: string | null
           name: string
+          preparation_time_minutes: number | null
           price: number
           protein: number | null
           restaurant_id: string
@@ -40,6 +41,7 @@ export type Database = {
           ingredients?: string | null
           model_url?: string | null
           name: string
+          preparation_time_minutes?: number | null
           price: number
           protein?: number | null
           restaurant_id: string
@@ -55,6 +57,7 @@ export type Database = {
           ingredients?: string | null
           model_url?: string | null
           name?: string
+          preparation_time_minutes?: number | null
           price?: number
           protein?: number | null
           restaurant_id?: string
